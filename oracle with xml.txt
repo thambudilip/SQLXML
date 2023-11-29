@@ -1,0 +1,65 @@
+Working with LOBs:
+
+
+BLOB - Binary LOB
+BFILE - Binary FILE
+
+BLOB/BFILE : 
+
+used for store binary data upto 4gb.
+files incude audio, video , images (mutlimedia objects)
+
+bfile - > External lob
+blob -> internal lob
+
+bfilename(dir object,filename) ;
+
+D:\Dilip\tulips.jpg
+
+CREATE DIRECTORY D11 AS 'D:\Dilip' ;
+
+GRANT READ,WRITE ON DIRECTORY D11 TO SCOTT ;
+
+CREATE TABLE DILIP_CUST(
+CID NUMBER(2),
+CNAME VARCHAR2(20),
+C_PHOTO BFILE );
+
+INSERT INTO DILIP_CUST VALUES(10,'DILIP',BFILENAME('PATH') );
+
+BFILENAME - > We can't insert a  images directly , we can insert a path of that file .
+
+
+--------------------------------------------------------------------------------------------
+
+--code written in SQL Developer
+
+CREATE DIRECTORY D11 AS 'D:\Dilip' ;
+
+
+SELECT * FROM all_directories;
+
+SELECT * FROM ALL_DIRECTORIES WHERE DIRECTORY_NAME = 'D11';
+
+DROP DIRECTORY D11;
+
+CREATE DIRECTORY D11 AS 'C:\Users\dilipkumar.p\Pictures\Dilip' ;
+
+
+GRANT READ,WRITE ON DIRECTORY D11 TO BSLFCVDV;
+
+CREATE TABLE DILIP_CUST(
+CID NUMBER(2),
+CNAME VARCHAR2(20),
+C_PHOTO BFILE );
+
+
+INSERT INTO DILIP_CUST VALUES(10,'DILIP',BFILENAME('D11','D2.PNG'));
+
+INSERT INTO DILIP_CUST VALUES(12,'HARIKRISHNAN',BFILENAME('D11','HARI.JPEG'));
+
+SELECT C_PHOTO FROM DILIP_CUST;
+
+SELECT * FROM DILIP_CUST ;
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
